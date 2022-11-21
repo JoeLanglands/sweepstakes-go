@@ -6,7 +6,7 @@ type Team struct {
 	Name    string
 	Ranking int
 	Odds    float64
-	Pot     Pot
+	PotID   int
 }
 
 type Sweepstaker struct {

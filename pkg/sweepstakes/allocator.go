@@ -17,7 +17,7 @@ func Allocate(s []Sweepstaker, teams []Team) error {
 	pots := []Pot{pot}
 
 	for i, t := range teams {
-		t.Pot = pot
+		t.PotID = pot.ID
 		pot.Teams = append(pot.Teams, t)
 
 		if i%len(s) == 0 {
