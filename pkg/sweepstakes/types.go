@@ -6,7 +6,6 @@ type Team struct {
 	Name    string
 	Ranking int
 	Odds    float64
-	PotID   int
 }
 
 type Sweepstaker struct {
@@ -14,19 +13,19 @@ type Sweepstaker struct {
 	Teams []Team
 }
 
-type Pot struct {
+type Pool struct {
 	ID    int
 	Teams []Team
 }
 
-func NewPot(id int) Pot {
-	return Pot{
+func NewPool(id int) Pool {
+	return Pool{
 		ID: id,
 	}
 }
 
-func (p *Pot) ShowPot() {
-	fmt.Printf("Pot %d: ", p.ID)
+func (p *Pool) ShowPool() {
+	fmt.Printf("Pool %d: ", p.ID)
 	for _, t := range p.Teams {
 		fmt.Printf("%s ", t.Name)
 	}

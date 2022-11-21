@@ -1,53 +1,59 @@
 package main
 
 import (
+	"math/rand"
+	"time"
+
 	"github.com/JoeLanglands/sweepstakes-go/pkg/sweepstakes"
 )
 
 func main() {
+	rand.Seed(time.Now().UnixNano())
+
 	sweepers := []sweepstakes.Sweepstaker{
 		{Name: "Joe"},
 		{Name: "Dan"},
-		{Name: "Dave"},
+		{Name: "Tim"},
 		{Name: "Harry"},
-		{Name: "Sean"},
-		{Name: "Jamie"},
-		{Name: "Jon"},
+		{Name: "Connor"},
+		{Name: "James"},
+		{Name: "John"},
+		{Name: "Glenn"},
 	}
 
 	teams := []sweepstakes.Team{
-		{Name: "Brazil", 23, 3.5, 0},
-		{Name: "Argentina", 1, 5.5, 0},
-		{Name: "France", 14, 5.5, 0},
-		{Name: "England", 14, 7.5, 0},
-		{Name: "Spain", 10, 8, 0},
-		{Name: "Germany", 4, 10, 0},
-		{Name: "Netherlands", 54, 11, 0},
-		{Name: "Portugal", 7, 12, 0},
-		{Name: "Belgium", 12, 16, 0},
-		{Name: "Denmark", 37, 28, 0},
-		{Name: "Uruguay", 7, 40, 0},
-		{Name: "Croatia", 16, 50, 0},
-		{Name: "Serbia", 62, 80, 0},
-		{Name: "Switzerland", 21, 80, 0},
-		{Name: "Mexico", 5, 100, 0},
-		{Name: "Poland", 38, 100, 0},
-		{Name: "Senegal", 44, 100, 0},
-		{Name: "USA", 36, 100, 0},
-		{Name: "Ecudor", 6, 150, 0},
-		{Name: "Wales", 18, 150, 0},
-		{Name: "Japan", 13, 200, 0},
-		{Name: "Cameroon", 29, 250, 0},
-		{Name: "Morocco", 24, 250, 0},
-		{Name: "South Korea", 17, 250, 0},
-		{Name: "Australia", 6, 500, 0},
-		{Name: "Canada", 18, 500, 0},
-		{Name: "Ghana", 13, 500, 0},
-		{Name: "Iran", 29, 500, 0},
-		{Name: "Tunisia", 24, 250, 0},
-		{Name: "Costa Rica", 17, 750, 0},
-		{Name: "Qatar", 17, 750, 0},
-		{Name: "Saudi Arabia", 17, 750, 0},
+		{Name: "Brazil", Ranking: 23, Odds: 3.5},
+		{Name: "Argentina", Ranking: 1, Odds: 5.5},
+		{Name: "France", Ranking: 14, Odds: 5.5},
+		{Name: "England", Ranking: 14, Odds: 7.5},
+		{Name: "Spain", Ranking: 10, Odds: 8},
+		{Name: "Germany", Ranking: 4, Odds: 10},
+		{Name: "Netherlands", Ranking: 54, Odds: 11},
+		{Name: "Portugal", Ranking: 7, Odds: 12},
+		{Name: "Belgium", Ranking: 12, Odds: 16},
+		{Name: "Denmark", Ranking: 37, Odds: 28},
+		{Name: "Uruguay", Ranking: 7, Odds: 40},
+		{Name: "Croatia", Ranking: 16, Odds: 50},
+		{Name: "Serbia", Ranking: 62, Odds: 80},
+		{Name: "Switzerland", Ranking: 21, Odds: 80},
+		{Name: "Mexico", Ranking: 5, Odds: 100},
+		{Name: "Poland", Ranking: 38, Odds: 100},
+		{Name: "Senegal", Ranking: 44, Odds: 100},
+		{Name: "USA", Ranking: 36, Odds: 100},
+		{Name: "Ecudor", Ranking: 6, Odds: 150},
+		{Name: "Wales", Ranking: 18, Odds: 150},
+		{Name: "Japan", Ranking: 13, Odds: 200},
+		{Name: "Cameroon", Ranking: 29, Odds: 250},
+		{Name: "Morocco", Ranking: 24, Odds: 250},
+		{Name: "South Korea", Ranking: 17, Odds: 250},
+		{Name: "Australia", Ranking: 6, Odds: 500},
+		{Name: "Canada", Ranking: 18, Odds: 500},
+		{Name: "Ghana", Ranking: 13, Odds: 500},
+		{Name: "Iran", Ranking: 29, Odds: 500},
+		{Name: "Tunisia", Ranking: 24, Odds: 250},
+		{Name: "Costa Rica", Ranking: 17, Odds: 750},
+		{Name: "Qatar", Ranking: 17, Odds: 750},
+		{Name: "Saudi Arabia", Ranking: 17, Odds: 750},
 	}
 
 	sweepstakes.Allocate(sweepers, teams)
