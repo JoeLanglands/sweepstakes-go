@@ -1,7 +1,6 @@
 package sweepstakes
 
 import (
-	"fmt"
 	"math/rand"
 	"sort"
 )
@@ -11,7 +10,7 @@ import (
 // numPools is derived from the number of sweepstakers. If the number
 // of teams is not divisible by the number of pools, the lowest ranked/odds
 // teams are not allocated to a pool.
-func MakePools(teams []Team, numPools int) []Pool {
+func MakePools(teams []Team, numPools int) ([]Pool, error) {
 	pools := make([]Pool, numPools)
 	poolSize := len(teams) / numPools
 	sort.Slice(teams, func(i, j int) bool {
@@ -23,15 +22,18 @@ func MakePools(teams []Team, numPools int) []Pool {
 		pools[i].Teams = teams[i*poolSize : (i+1)*poolSize]
 	}
 
-	return pools
+	return pools, nil
 }
 
 // Allocate takes a slice of teams and a slice of sweepstakers and allocates
 // teams to sweepstakers based on the odds of each team. Teams are first divided
 // into pools based on the number of sweepstakers.
-func Allocate(s []Sweepstaker, teams []Team) error {
+func Allocate(s []Sweepstaker, teams []Team) ([]Sweepstaker, error) {
 
-	pools := MakePools(teams, len(teams)/len(s))
+	pools, err := MakePools(teams, len(teams)/len(s))
+	if err != nil {
+		return nil, err
+	}
 
 	for _, p := range pools {
 		p.ShowPool()
@@ -49,11 +51,5 @@ func Allocate(s []Sweepstaker, teams []Team) error {
 		}
 	}
 
-	fmt.Println()
-	fmt.Println("Allocated teams:")
-	for _, s := range s {
-		s.ShowSweepstaker()
-	}
-
-	return nil
+	return s, nil
 }

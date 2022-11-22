@@ -1,6 +1,10 @@
 package sweepstakes
 
-import "fmt"
+import (
+	"fmt"
+
+	"github.com/fatih/color"
+)
 
 type Team struct {
 	Name    string
@@ -25,17 +29,21 @@ func NewPool(id int) Pool {
 }
 
 func (p *Pool) ShowPool() {
+	color.Set(color.FgBlue)
 	fmt.Printf("Pool %d: ", p.ID)
+	color.Unset()
 	for _, t := range p.Teams {
-		fmt.Printf("%s ", t.Name)
+		fmt.Printf("%s; ", t.Name)
 	}
 	fmt.Println()
 }
 
 func (s *Sweepstaker) ShowSweepstaker() {
+	color.Set(color.FgGreen)
 	fmt.Printf("%s: ", s.Name)
+	color.Unset()
 	for _, t := range s.Teams {
-		fmt.Printf("%s ", t.Name)
+		fmt.Printf("%s; ", t.Name)
 	}
 	fmt.Println()
 }

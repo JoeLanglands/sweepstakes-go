@@ -1,10 +1,12 @@
 package main
 
 import (
+	"fmt"
 	"math/rand"
 	"time"
 
 	"github.com/JoeLanglands/sweepstakes-go/pkg/sweepstakes"
+	"github.com/fatih/color"
 )
 
 func main() {
@@ -56,5 +58,15 @@ func main() {
 		{Name: "Saudi Arabia", Ranking: 17, Odds: 750},
 	}
 
-	sweepstakes.Allocate(sweepers, teams)
+	s, err := sweepstakes.Allocate(sweepers, teams)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println()
+	color.Set(color.FgRed)
+	fmt.Println("Allocated teams:")
+	fmt.Println("----------------")
+	for _, s := range s {
+		s.ShowSweepstaker()
+	}
 }
