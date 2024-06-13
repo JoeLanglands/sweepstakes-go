@@ -5,32 +5,53 @@ import (
 	"sort"
 )
 
+type RankBy int
+
+const (
+	RankByOdds RankBy = iota
+	RankByRanking
+)
+
 // MakePools takes a slice of teams and a number of pools and
 // organises the teams into pools based on the odds of each team.
 // numPools is derived from the number of sweepstakers. If the number
 // of teams is not divisible by the number of pools, the lowest ranked/odds
 // teams are not allocated to a pool.
-func MakePools(teams []Team, numPools int) ([]Pool, error) {
+func MakePools(teams []Team, numPools int, rankBy RankBy) ([]Pool, error) {
 	pools := make([]Pool, numPools)
 	poolSize := len(teams) / numPools
 	sort.Slice(teams, func(i, j int) bool {
 		return teams[i].Odds < teams[j].Odds
 	})
+	teamsSorted := sortTeams(teams, rankBy)
 
 	for i := range pools {
 		pools[i].ID = i + 1
-		pools[i].Teams = teams[i*poolSize : (i+1)*poolSize]
+		pools[i].Teams = teamsSorted[i*poolSize : (i+1)*poolSize]
 	}
 
 	return pools, nil
 }
 
+func sortTeams(teams []Team, rankBy RankBy) []Team {
+	if rankBy == RankByOdds {
+		sort.Slice(teams, func(i, j int) bool {
+			return teams[i].Odds < teams[j].Odds
+		})
+	} else {
+		sort.Slice(teams, func(i, j int) bool {
+			return teams[i].Ranking < teams[j].Ranking
+		})
+	}
+	return teams
+}
+
 // Allocate takes a slice of teams and a slice of sweepstakers and allocates
 // teams to sweepstakers based on the odds of each team. Teams are first divided
 // into pools based on the number of sweepstakers.
-func Allocate(s []Sweepstaker, teams []Team) ([]Sweepstaker, error) {
+func Allocate(s []Sweepstaker, teams []Team, rankBy RankBy) ([]Sweepstaker, error) {
 
-	pools, err := MakePools(teams, len(teams)/len(s))
+	pools, err := MakePools(teams, len(teams)/len(s), rankBy)
 	if err != nil {
 		return nil, err
 	}

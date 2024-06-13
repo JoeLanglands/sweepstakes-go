@@ -58,7 +58,7 @@ func main() {
 		{Name: "Saudi Arabia", Ranking: 17, Odds: 750},
 	}
 
-	s, err := sweepstakes.Allocate(sweepers, teams)
+	s, err := sweepstakes.Allocate(sweepers, teams, sweepstakes.RankByOdds)
 	if err != nil {
 		panic(err)
 	}
