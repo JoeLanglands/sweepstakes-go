@@ -33,7 +33,7 @@ func (p *Pool) ShowPool() {
 	fmt.Printf("Pool %d: ", p.ID)
 	color.Unset()
 	for _, t := range p.Teams {
-		fmt.Printf("%s; ", t.Name)
+		fmt.Printf("%s, ", t.Name)
 	}
 	fmt.Println()
 }
@@ -43,7 +43,7 @@ func (s *Sweepstaker) ShowSweepstaker() {
 	fmt.Printf("%s: ", s.Name)
 	color.Unset()
 	for _, t := range s.Teams {
-		fmt.Printf("%s; ", t.Name)
+		fmt.Printf("%s, ", t.Name)
 	}
 	fmt.Println()
 }

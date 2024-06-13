@@ -58,6 +58,16 @@ func main() {
 		{Name: "Saudi Arabia", Ranking: 17, Odds: 750},
 	}
 
+	color.Set(color.FgRed)
+	fmt.Println("----------------")
+	fmt.Printf("Number of sweepstakers: %d\n", len(sweepers))
+	fmt.Printf("Number of teams: %d\n", len(teams))
+	fmt.Printf("Number of leftover teams: %d\n", len(teams)%len(sweepers))
+
+	color.Set(color.FgRed)
+	fmt.Println("----------------")
+	fmt.Println()
+
 	s, err := sweepstakes.Allocate(sweepers, teams, sweepstakes.RankByOdds)
 	if err != nil {
 		panic(err)
