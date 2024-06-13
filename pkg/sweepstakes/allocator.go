@@ -56,6 +56,10 @@ func Allocate(s []Sweepstaker, teams []Team, rankBy RankBy) ([]Sweepstaker, erro
 		return nil, err
 	}
 
+	if len(pools) == 1 {
+		initSinglePool(&pools, len(s))
+	}
+
 	for _, p := range pools {
 		p.ShowPool()
 
@@ -73,4 +77,10 @@ func Allocate(s []Sweepstaker, teams []Team, rankBy RankBy) ([]Sweepstaker, erro
 	}
 
 	return s, nil
+}
+
+// initSinglePool will truncate the teams of the single pool to match the number of players
+// this ensures that every sweeper gets a team from the top most rankings.
+func initSinglePool(pools *[]Pool, numSweepstakers int) {
+	(*pools)[0].Teams = (*pools)[0].Teams[:numSweepstakers]
 }
